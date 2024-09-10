@@ -10,8 +10,7 @@ import java.util.List;
 @ControllerAdvice
 @NoArgsConstructor
 public class Cart {
-
-    private long id;
-    private Customer customer;
+    private Long id;
+    private Account account;
     private List<CartItem> products;
 }

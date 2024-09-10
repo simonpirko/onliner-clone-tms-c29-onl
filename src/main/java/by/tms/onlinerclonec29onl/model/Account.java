@@ -12,4 +12,14 @@ public class Account {
     private String name;
     private String username;
     private String password;
+    private Type type;
+    private Role role;
+
+    enum Type {
+        PERSONAL, BUSINESS
+    }
+
+    enum Role {
+        USER, ADMIN
+    }
 }
