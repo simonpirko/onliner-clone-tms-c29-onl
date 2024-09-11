@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @NoArgsConstructor
 public class Order {
     private long id;
-    private Customer customer;
+
     private OrderItem orderItem;
     private double totalPrice;
     private String status;
