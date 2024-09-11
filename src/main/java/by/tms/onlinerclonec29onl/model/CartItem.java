@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 public class CartItem {
     private long id;
     private Product product;
-    private Seller seller;
+
     private int quantity;
     private double price;
 }
