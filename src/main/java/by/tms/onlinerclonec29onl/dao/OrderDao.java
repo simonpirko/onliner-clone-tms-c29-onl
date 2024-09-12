@@ -57,6 +57,6 @@ public class OrderDao {
     }
 
     public List<Order> findAll() {
-        return jdbcTemplate.queryForList("select id, orderitem_id, totalprice, status from public.order", Order.class);
+        return jdbcTemplate.queryForList("select * from public.order", Order.class);
     }
 }

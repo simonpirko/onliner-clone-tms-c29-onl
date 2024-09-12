@@ -1,4 +1,4 @@
-CREATE TABLE account
+CREATE TABLE IF NOT EXISTS account
 (
     id       BIGINT PRIMARY KEY,
     name     VARCHAR(255),
@@ -8,7 +8,7 @@ CREATE TABLE account
     role     VARCHAR(50)  NOT NULL
 );
 
-CREATE TABLE product
+CREATE TABLE IF NOT EXISTS product
 (
     id          BIGINT PRIMARY KEY,
     name        VARCHAR(255),
@@ -17,14 +17,14 @@ CREATE TABLE product
     image       VARCHAR(255)
 );
 
-CREATE TABLE cart
+CREATE TABLE IF NOT EXISTS cart
 (
     id         BIGINT PRIMARY KEY,
     account_id BIGINT,
     FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE
 );
 
-CREATE TABLE cart_item
+CREATE TABLE IF NOT EXISTS cart_item
 (
     id         BIGINT PRIMARY KEY,
     product_id BIGINT,
@@ -35,7 +35,7 @@ CREATE TABLE cart_item
     FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE
 );
 
-CREATE TABLE orderItem
+CREATE TABLE IF NOT EXISTS orderItem
 (
     id         BIGINT PRIMARY KEY,
     product_id BIGINT,
@@ -44,7 +44,7 @@ CREATE TABLE orderItem
     FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
 );
 
-CREATE TABLE "order"
+CREATE TABLE IF NOT EXISTS "order"
 (
     id           BIGINT PRIMARY KEY,
     orderItem_id BIGINT,
@@ -53,7 +53,7 @@ CREATE TABLE "order"
     FOREIGN KEY (orderItem_id) REFERENCES orderItem (id) ON DELETE CASCADE
 );
 
-CREATE TABLE shop
+CREATE TABLE IF NOT EXISTS shop
 (
     id          BIGINT PRIMARY KEY,
     title       VARCHAR(255),
