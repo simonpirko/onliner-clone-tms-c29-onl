@@ -16,7 +16,6 @@ public class ShopDao {
 
     public int save(Shop shop) {
         return jdbcTemplate.update("insert into public.shop (id, title, description, creator_id) values (default, ?, ?, ?)",
-                shop.getId(),
                 shop.getTitle(),
                 shop.getDescription(),
                 shop.getCreator().getId());
@@ -45,8 +44,8 @@ public class ShopDao {
         return Optional.of(shop);
     }
 
-    public int delete(long id) {
-        return jdbcTemplate.update("delete from public.shop where id = ?", id);
+    public int delete(Shop shop) {
+        return jdbcTemplate.update("delete from public.shop where id = ?", shop.getId());
     }
 
     public List<Shop> findAll() {

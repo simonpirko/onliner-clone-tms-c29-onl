@@ -16,7 +16,6 @@ public class ProductDao {
 
     public int save(Product product) {
         return jdbcTemplate.update("insert into public.product (id, name, description, category, image) values (default, ?, ?, ?, ?)",
-                product.getId(),
                 product.getName(),
                 product.getDescription(),
                 product.getCategory(),
@@ -28,7 +27,8 @@ public class ProductDao {
                 product.getName(),
                 product.getDescription(),
                 product.getCategory(),
-                product.getImage());
+                product.getImage(),
+                product.getId());
     }
 
     public Optional<Product> findById(long id) {
@@ -46,8 +46,8 @@ public class ProductDao {
         return Optional.of(product);
     }
 
-    public int delete(long id) {
-        return jdbcTemplate.update("delete from public.product where id = ?", id);
+    public int delete(Product product) {
+        return jdbcTemplate.update("delete from public.product where id = ?", product.getId());
     }
 
     public List<Product> findAll() {
