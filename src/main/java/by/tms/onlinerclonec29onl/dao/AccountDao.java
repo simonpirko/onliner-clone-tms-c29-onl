@@ -44,6 +44,9 @@ public class AccountDao {
             a.setRole(Account.Role.valueOf(resultSet.getString("role")));
             return a;
         }, id);
+        if (account == null) {
+            return Optional.empty();
+        }
         return Optional.of(account);
     }
 
