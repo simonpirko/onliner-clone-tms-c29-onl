@@ -19,8 +19,8 @@ public class AccountDao {
                 account.getName(),
                 account.getUsername(),
                 account.getPassword(),
-                account.getType().toString(),
-                account.getRole().toString());
+                account.getType().toString().toUpperCase(),
+                account.getRole().toString().toUpperCase());
     }
 
     public int update(Account account) {
@@ -40,8 +40,8 @@ public class AccountDao {
             a.setName(resultSet.getString("name"));
             a.setUsername(resultSet.getString("username"));
             a.setPassword(resultSet.getString("password"));
-            a.setType(Account.Type.valueOf(resultSet.getString("type")));
-            a.setRole(Account.Role.valueOf(resultSet.getString("role")));
+            a.setType(Account.Type.valueOf(resultSet.getString("type").toUpperCase()));
+            a.setRole(Account.Role.valueOf(resultSet.getString("role").toUpperCase()));
             return a;
         }, id);
         if (account == null) {

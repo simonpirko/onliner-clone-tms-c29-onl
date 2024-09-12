@@ -1,6 +1,7 @@
 package by.tms.onlinerclonec29onl.controller;
 
 import by.tms.onlinerclonec29onl.dao.OrderDao;
+import by.tms.onlinerclonec29onl.model.Account;
 import by.tms.onlinerclonec29onl.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,11 @@ public class IndexController {
 
     @Autowired
     private OrderDao orderDao;
+
+    public static void main(String[] args) {
+        Account.Type sad = Account.Type.valueOf("sad");
+
+    }
 
     @GetMapping
     public String index() {
