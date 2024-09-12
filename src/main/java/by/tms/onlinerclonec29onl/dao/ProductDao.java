@@ -34,6 +34,7 @@ public class ProductDao {
     public Optional<Product> findById(long id) {
         Product product = jdbcTemplate.queryForObject("select * from public.product where id = ?", (resultSet, rowNum) -> {
             Product p = new Product();
+            p.setId(id);
             p.setName(resultSet.getString("name"));
             p.setDescription(resultSet.getString("description"));
             p.setCategory(resultSet.getString("category"));
