@@ -15,11 +15,11 @@ public class Account {
     private Type type;
     private Role role;
 
-    enum Type {
+    public enum Type {
         PERSONAL, BUSINESS
     }
 
-    enum Role {
+    public enum Role {
         USER, ADMIN
     }
 }
