@@ -55,6 +55,6 @@ public class AccountDao {
     }
 
     public List<Account> getAll() {
-        return jdbcTemplate.queryForList("select * from account", Account.class);
+        return jdbcTemplate.queryForList("select * from public.account", Account.class);
     }
 }
