@@ -38,11 +38,7 @@ public class AccountDao {
     }
 
     public Optional<Account> getById(long id) {
-        Account account = jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id);
-        if (account == null) {
-            return Optional.empty();
-        }
-        return Optional.of(account);
+        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id));
     }
 
     public int delete(Account account) {

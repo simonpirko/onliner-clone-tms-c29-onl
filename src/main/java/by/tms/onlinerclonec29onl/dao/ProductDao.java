@@ -1,5 +1,6 @@
 package by.tms.onlinerclonec29onl.dao;
 
+import by.tms.onlinerclonec29onl.dao.mapper.ProductRowMapper;
 import by.tms.onlinerclonec29onl.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +14,9 @@ public class ProductDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private ProductRowMapper productRowMapper;
 
     public int save(Product product) {
         return jdbcTemplate.update("insert into public.product (id, name, description, category, image) values (default, ?, ?, ?, ?)",
@@ -31,27 +35,15 @@ public class ProductDao {
                 product.getId());
     }
 
-    public Optional<Product> findById(long id) {
-        Product product = jdbcTemplate.queryForObject("select * from public.product where id = ?", (resultSet, rowNum) -> {
-            Product p = new Product();
-            p.setId(id);
-            p.setName(resultSet.getString("name"));
-            p.setDescription(resultSet.getString("description"));
-            p.setCategory(resultSet.getString("category"));
-            p.setImage(resultSet.getBytes("image"));
-            return p;
-        }, id);
-        if (product == null) {
-            return Optional.empty();
-        }
-        return Optional.of(product);
+    public Optional<Product> getById(long id) {
+        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.product where id = ?", productRowMapper, id));
     }
 
     public int delete(Product product) {
         return jdbcTemplate.update("delete from public.product where id = ?", product.getId());
     }
 
-    public List<Product> findAll() {
-        return jdbcTemplate.queryForList("select * from public.product", Product.class);
+    public List<Product> getAll() {
+        return jdbcTemplate.query("select * from public.product", productRowMapper);
     }
 }
