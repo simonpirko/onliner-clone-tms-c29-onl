@@ -15,5 +15,9 @@ public class Order {
     private long id;
     private OrderItem orderItem;
     private double totalPrice;
-    private String status;
+    private OrderStatus status;
+
+    public enum OrderStatus {
+        OPEN, CLOSED, ARCHIVED
+    }
 }

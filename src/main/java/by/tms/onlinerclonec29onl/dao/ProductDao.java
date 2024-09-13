@@ -19,7 +19,7 @@ public class ProductDao {
     private ProductRowMapper productRowMapper;
 
     public int save(Product product) {
-        return jdbcTemplate.update("insert into public.product (id, name, description, category, image) values (default, ?, ?, ?, ?)",
+        return jdbcTemplate.update("insert into public.product (main_product_id, name, description, category, image) values (default, ?, ?, ?, ?)",
                 product.getName(),
                 product.getDescription(),
                 product.getCategory(),
@@ -27,7 +27,7 @@ public class ProductDao {
     }
 
     public int update(Product product) {
-        return jdbcTemplate.update("update public.product set name = ?, description = ?, category = ?, image = ? where id = ?",
+        return jdbcTemplate.update("update public.product set name = ?, description = ?, category = ?, image = ? where main_product_id = ?",
                 product.getName(),
                 product.getDescription(),
                 product.getCategory(),
@@ -36,11 +36,11 @@ public class ProductDao {
     }
 
     public Optional<Product> getById(long id) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.product where id = ?", productRowMapper, id));
+        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.product where main_product_id = ?", productRowMapper, id));
     }
 
     public int delete(Product product) {
-        return jdbcTemplate.update("delete from public.product where id = ?", product.getId());
+        return jdbcTemplate.update("delete from public.product where main_product_id = ?", product.getId());
     }
 
     public List<Product> getAll() {

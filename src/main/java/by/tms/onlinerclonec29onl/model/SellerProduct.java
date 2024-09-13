@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @NoArgsConstructor
 public class SellerProduct {
     private Product product;
-
+    private Shop shop;
     private double price;
 }
