@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @AllArgsConstructor
 @Builder
 public class OrderItem {
-    private long id;
+    private Long id;
     private Product product;
     private int quantity;
     private double price;

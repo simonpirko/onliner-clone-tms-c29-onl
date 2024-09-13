@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @ControllerAdvice
 @NoArgsConstructor
 public class CartItem {
-    private long id;
-    private Product product;
-
+    private Long id;
+    private SellerProduct sellerProduct;
     private int quantity;
-    private double price;
 }

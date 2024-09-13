@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @Data
-@ControllerAdvice
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Product {
-    private long id;
+    private Long id;
     private String name;
     private String description;
     private String category;
