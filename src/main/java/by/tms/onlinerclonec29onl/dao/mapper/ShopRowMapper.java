@@ -15,9 +15,9 @@ public class ShopRowMapper implements RowMapper<Shop> {
     @Override
     public Shop mapRow(ResultSet rs, int rowNum) throws SQLException {
         Shop shop = new Shop();
-        shop.setId(rs.getLong("id"));
-        shop.setTitle(rs.getString("title"));
-        shop.setDescription(rs.getString("description"));
+        shop.setId(rs.getLong("main_shop_id"));
+        shop.setTitle(rs.getString("shop_title"));
+        shop.setDescription(rs.getString("shop_description"));
         shop.setCreator(accountRowMapper.mapRow(rs, rowNum));
         return shop;
     }

@@ -13,10 +13,10 @@ CREATE TABLE if not exists account
 CREATE TABLE if not exists product
 (
     main_product_id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name            VARCHAR(255),
-    description     TEXT,
-    category        VARCHAR(100),
-    image           VARCHAR(255)
+    product_name            VARCHAR(255),
+    product_description     TEXT,
+    product_category        VARCHAR(100),
+    product_image           VARCHAR(255)
 );
 
 CREATE TABLE if not exists orderitem
@@ -39,18 +39,19 @@ CREATE TABLE if not exists "order"
 
 CREATE TABLE if not exists shop
 (
-    id          BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    title       VARCHAR(255),
-    description TEXT,
+    main_shop_id          BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    shop_title       VARCHAR(255),
+    shop_description TEXT,
     creator_id  BIGINT,
     FOREIGN KEY (creator_id) REFERENCES account (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS sellerproduct
 (
+    seller_product_id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     product_id BIGINT,
     shop_id    BIGINT,
     price      DECIMAL(10, 2),
     FOREIGN KEY (product_id) REFERENCES product (main_product_id) ON DELETE CASCADE,
-    FOREIGN KEY (shop_id) REFERENCES shop (id) ON DELETE CASCADE
+    FOREIGN KEY (shop_id) REFERENCES shop (main_shop_id) ON DELETE CASCADE
 )

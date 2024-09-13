@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @ControllerAdvice
 @NoArgsConstructor
 public class SellerProduct {
+    private Long id;
     private Product product;
     private Shop shop;
     private double price;
