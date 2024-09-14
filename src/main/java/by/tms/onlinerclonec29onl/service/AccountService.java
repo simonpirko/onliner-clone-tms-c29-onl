@@ -11,8 +11,11 @@ import java.util.Optional;
 @Service
 public class AccountService {
 
-    @Autowired
-    private AccountDao accountDao;
+    private final AccountDao accountDao;
+
+    public AccountService(AccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
 
     public void register(Account account) {
         accountDao.save(account);
