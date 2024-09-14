@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @Builder
 public class Order {
     private long id;
+
     private OrderItem orderItem;
     private double totalPrice;
     private String status;
