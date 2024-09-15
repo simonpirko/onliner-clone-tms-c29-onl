@@ -19,7 +19,7 @@ public class ProductDao {
     private ProductRowMapper productRowMapper;
 
     public int save(Product product) {
-        return jdbcTemplate.update("insert into public.product (main_product_id, name, description, category, image) values (default, ?, ?, ?, ?)",
+        return jdbcTemplate.update("insert into public.product (main_product_id, product_name, product_description, product_category, product_image) values (default, ?, ?, ?, ?)",
                 product.getName(),
                 product.getDescription(),
                 product.getCategory(),
@@ -27,7 +27,7 @@ public class ProductDao {
     }
 
     public int update(Product product) {
-        return jdbcTemplate.update("update public.product set name = ?, description = ?, category = ?, image = ? where main_product_id = ?",
+        return jdbcTemplate.update("update public.product set product_name = ?, product_description = ?, product_category = ?, product_image = ? where main_product_id = ?",
                 product.getName(),
                 product.getDescription(),
                 product.getCategory(),

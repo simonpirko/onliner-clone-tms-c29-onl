@@ -19,14 +19,14 @@ public class ShopDao {
     private ShopRowMapper shopRowMapper;
 
     public int save(Shop shop) {
-        return jdbcTemplate.update("insert into public.shop (id, title, description, creator_id) values (default, ?, ?, ?)",
+        return jdbcTemplate.update("insert into public.shop (main_shop_id, shop_title, shop_description, creator_id) values (default, ?, ?, ?)",
                 shop.getTitle(),
                 shop.getDescription(),
                 shop.getCreator().getId());
     }
 
     public int update(Shop shop) {
-        return jdbcTemplate.update("update public.shop set title = ?, description = ?, creator_id = ? where id = ?",
+        return jdbcTemplate.update("update public.shop set shop_title = ?, shop_description = ?, creator_id = ? where main_shop_id = ?",
                 shop.getTitle(),
                 shop.getDescription(),
                 shop.getCreator().getId(),
@@ -34,12 +34,12 @@ public class ShopDao {
     }
 
     public Optional<Shop> getById(long id) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.shop s join public.account a on s.creator_id = a.id where s.id = ?", shopRowMapper, id));
+        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.shop s join public.account a on s.creator_id = a.id where s.main_shop_id = ?", shopRowMapper, id));
     }
 
 
     public int delete(Shop shop) {
-        return jdbcTemplate.update("delete from public.shop where id = ?", shop.getId());
+        return jdbcTemplate.update("delete from public.shop where shop.main_shop_id = ?", shop.getId());
     }
 
     public List<Shop> getAll() {
