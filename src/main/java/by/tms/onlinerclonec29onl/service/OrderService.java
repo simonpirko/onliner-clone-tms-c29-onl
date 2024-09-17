@@ -31,6 +31,6 @@ public class OrderService {
     }
 
     public void deleteOrder(long id) {
-        orderDao.delete(orderDao.getById(id).orElseThrow(() -> new IllegalArgumentException("ORDER not found")));
+        orderDao.delete(orderDao.getById(id).orElseThrow(() -> new IllegalArgumentException("Order not found")));
     }
 }

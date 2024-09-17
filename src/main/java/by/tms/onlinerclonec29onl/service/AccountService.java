@@ -34,6 +34,6 @@ public class AccountService {
     }
 
     public void deleteAccount(long id) {
-        accountDao.delete(accountDao.getById(id).orElseThrow(() -> new IllegalArgumentException("ACCOUT not found")));
+        accountDao.delete(accountDao.getById(id).orElseThrow(() -> new IllegalArgumentException("Account not found")));
     }
 }

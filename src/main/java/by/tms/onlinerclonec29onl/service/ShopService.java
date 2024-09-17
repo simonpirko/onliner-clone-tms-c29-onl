@@ -31,6 +31,6 @@ public class ShopService {
     }
 
     public void deleteShop(long id) {
-        shopDao.delete(shopDao.getById(id).orElseThrow(() -> new IllegalArgumentException("SHOP not found")));
+        shopDao.delete(shopDao.getById(id).orElseThrow(() -> new IllegalArgumentException("Shop not found")));
     }
 }
