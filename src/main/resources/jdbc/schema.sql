@@ -1,5 +1,7 @@
 DROP SCHEMA public CASCADE;
+
 CREATE SCHEMA public;
+
 CREATE TABLE if not exists account
 (
     id       BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
