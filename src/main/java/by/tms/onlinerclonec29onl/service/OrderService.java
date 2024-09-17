@@ -23,14 +23,14 @@ public class OrderService {
     }
 
     public Optional<Order> getOrderById(long id) {
-        return orderDao.findById(id);
+        return orderDao.getById(id);
     }
 
     public List<Order> getAllOrders() {
-        return orderDao.findAll();
+        return orderDao.getAll();
     }
 
     public void deleteOrder(long id) {
-        orderDao.delete(orderDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Order not found")));
+        orderDao.delete(orderDao.getById(id).orElseThrow(() -> new IllegalArgumentException("ORDER not found")));
     }
 }

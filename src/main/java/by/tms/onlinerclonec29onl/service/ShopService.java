@@ -23,14 +23,14 @@ public class ShopService {
     }
 
     public Optional<Shop> getShopById(long id) {
-        return shopDao.findById(id);
+        return shopDao.getById(id);
     }
 
     public List<Shop> getAllShops() {
-        return shopDao.findAll();
+        return shopDao.getAll();
     }
 
     public void deleteShop(long id) {
-        shopDao.delete(shopDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Shop not found")));
+        shopDao.delete(shopDao.getById(id).orElseThrow(() -> new IllegalArgumentException("SHOP not found")));
     }
 }

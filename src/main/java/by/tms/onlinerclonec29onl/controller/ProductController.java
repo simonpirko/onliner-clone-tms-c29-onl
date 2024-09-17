@@ -21,7 +21,7 @@ public class ProductController {
 
     @GetMapping("/")
     public String getProducts(Model model) {
-        List<Product> products = productDao.findAll();
+        List<Product> products = productDao.getAll();
         model.addAttribute("products", products);
 
         return "index";
@@ -29,7 +29,7 @@ public class ProductController {
 
     @PostMapping("/add-to-cart")
     public String addToCart(@RequestParam("productId") Integer productId, Model model) {
-        Product product = productDao.findById(productId).get();
+        Product product = productDao.getById(productId).get();
         productDao.delete(product);
         return "redirect:/";
 
