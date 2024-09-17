@@ -1,12 +1,12 @@
 package by.tms.onlinerclonec29onl.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@ToString
 public class Account {
     private Long id;
     private String name;
@@ -15,11 +15,11 @@ public class Account {
     private Type type;
     private Role role;
 
-    enum Type {
+    public enum Type {
         PERSONAL, BUSINESS
     }
 
-    enum Role {
+    public enum Role {
         USER, ADMIN
     }
 }

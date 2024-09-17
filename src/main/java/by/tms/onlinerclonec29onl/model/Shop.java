@@ -2,11 +2,9 @@ package by.tms.onlinerclonec29onl.model;
 
 import lombok.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
-@ToString
 @Builder
 public class Shop {
     private Long id;
