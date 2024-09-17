@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
+import java.math.BigDecimal;
+
 @Data
 @ControllerAdvice
 @NoArgsConstructor
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 public class Order {
     private Long id;
     private OrderItem orderItem;
-    private double totalPrice;
+    private BigDecimal totalPrice;
     private OrderStatus status;
 
     public enum OrderStatus {
