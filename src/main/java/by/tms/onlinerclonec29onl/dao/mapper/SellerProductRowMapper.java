@@ -1,7 +1,6 @@
 package by.tms.onlinerclonec29onl.dao.mapper;
 
 import by.tms.onlinerclonec29onl.model.SellerProduct;
-import by.tms.onlinerclonec29onl.model.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;

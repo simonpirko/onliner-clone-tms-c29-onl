@@ -1,6 +1,5 @@
 package by.tms.onlinerclonec29onl.service;
 
-import by.tms.onlinerclonec29onl.controller.AccountController;
 import by.tms.onlinerclonec29onl.dao.AccountDao;
 import by.tms.onlinerclonec29onl.model.Account;
 import by.tms.onlinerclonec29onl.model.dto.LoginAccountDto;
@@ -13,13 +12,9 @@ import java.util.Optional;
 @Service
 public class AccountService {
 
-    private final AccountDao accountDao;
-    private final AccountController accountController;
+    @Autowired
+    private AccountDao accountDao;
 
-    public AccountService(AccountDao accountDao, AccountController accountController) {
-        this.accountDao = accountDao;
-        this.accountController = accountController;
-    }
 
     public void register(Account account) {
         account.setRole(Account.Role.USER);
@@ -31,7 +26,7 @@ public class AccountService {
         Optional<Account> account = accountDao.getByUsername(loginAccountDto.getUsername());
         if (account.isPresent()) {
             if (account.get().getPassword().equals(loginAccountDto.getPassword())) {
-                return Optional.of(account.get());
+                return account;
             }
         }
         return Optional.empty();
