@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-RU-Compatible" content="ie=edge">
+    <title>Профиль пользователя</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
+
 <body>
 
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Onliner.by</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="#">Главная</a>
+                <a class="nav-link" href="#">Магазин</a>
+                <a class="nav-link" href="#">Профиль</a>
+                <a class="nav-link" href="#">Карзина</a>
+                <a class="nav-link disabled" aria-disabled="true">Выход</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="profile-header">
+    <div class="container text-center">
+
+
+        <h1>Профиль пользователя</h1>
+
+    </div>
+</div>
+
+
+
+
+<div class="container content-section">
+    <div class="row">
+
+        <div class="text-center">
+            <div class="profile-img">
+                <img src="https://via.placeholder.com/150" alt="Аватарка профиля">
+            </div>
+            <h2>Иван Иванов</h2>
+            <p class="text-muted">Участник с 2024 года</p>
+
+            <button class="btn btn-primary">Редактировать профиль</button>
+
+        </div>
+
+        <div class="col mt-3">
+            <div class="card mb-3">
+                <div class="card-header">Информация</div>
+                <div class="card-body">
+                    <h5 class="card-title">Обо мне</h5>
+                    <p class="card-text">Меня зовут Иван, я занимаюсь программированием. Увлекаюсь путешествиями и фотографиями.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">Мои достижения</div>
+                <div class="card-body">
+                    <ul>
+                        <li>Куплено товаров: 35</li>
+                        <li>Оставлено отзывов: 12</li>
+                        <li>Участие в обсуждениях: 54</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">Контактная информация</div>
+                <div class="card-body">
+                    <p>Email: ivanov@example.com</p>
+                    <p>Телефон: +375 29 123-45-67</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
