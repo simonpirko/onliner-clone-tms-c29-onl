@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SellerProductService {
@@ -32,5 +33,9 @@ public class SellerProductService {
 
     public List<SellerProduct> getAll() {
         return sellerProductDao.getAll();
+    }
+
+    public List<SellerProduct> getAllProductsByShop(Long shopId) {
+        return sellerProductDao.getAll().stream().filter(product -> product.getShop().getId().equals(shopId)).collect(Collectors.toList());
     }
 }
