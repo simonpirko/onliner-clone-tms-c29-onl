@@ -30,6 +30,10 @@ public class ShopService {
         return shopDao.getAll();
     }
 
+    public Optional<Shop> getShopByCreatorId(Long accountID) {
+        return shopDao.getAll().stream().filter(shop -> shop.getCreator().getId().equals(accountID)).findFirst();
+    }
+
     public void deleteShop(long id) {
         shopDao.delete(shopDao.getById(id).orElseThrow(() -> new IllegalArgumentException("Shop not found")));
     }
