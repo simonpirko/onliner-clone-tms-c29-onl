@@ -11,14 +11,14 @@ import lombok.*;
 @ToString
 public class Account {
     private Long id;
-    @NotBlank(message = "www")
-    @NotEmpty(message = "qqq")
+    @NotBlank(message = "Not Blank")
+    @NotEmpty(message = "Not Empty")
     private String name;
-    @NotBlank(message = "www")
-    @NotEmpty(message = "qqq")
+    @NotBlank(message = "Not Blank")
+    @NotEmpty(message = "Not Empty")
     private String username;
-    @NotBlank(message = "www")
-    @NotEmpty(message = "qqq")
+    @NotBlank(message = "Not Blank")
+    @NotEmpty(message = "Not Empty")
     private String password;
     private Type type;
     private Role role;
