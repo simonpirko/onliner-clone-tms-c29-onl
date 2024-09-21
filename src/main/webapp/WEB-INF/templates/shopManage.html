@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Управление Магазином</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Управление Магазином</h1>
+
+    <!--/*@thymesVar id="shop" type="by.tms.onlinerclonec29onl.model.Shop"*/-->
+    <div th:if="${shop != null}" th:object="${shop}">
+        <div class="card">
+            <div class="card-header">
+                <h2 th:text="${shop.title}"></h2>
+            </div>
+            <div class="card-body">
+                <p th:text="${shop.description}"></p>
+
+                <form th:action="@{/shop/update}" method="post" class="mt-4">
+                    <input type="hidden" th:value="${shop.id}" name="shopId"/>
+
+                    <div class="form-group">
+                        <label for="shopTitle">Название Магазина</label>
+                        <input type="text" class="form-control" id="shopTitle" name="title" th:value="${shop.title}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="shopDescription">Описание Магазина</label>
+                        <textarea class="form-control" id="shopDescription" name="description" rows="4" required
+                                  th:text="${shop.description}"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Обновить Магазин</button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Удалить Магазин</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${shop == null}">
+        <p class="alert alert-warning text-center">У вас еще нет магазина. Пожалуйста, создайте его.</p>
+    </div>
+</div>
+
+<!-- Модальное окно для удаления магазина -->
+<!--/*@thymesVar id="shop" type="by.tms.onlinerclonec29onl.model.Shop"*/-->
+<div th:object="${shop}" class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Подтверждение удаления</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Вы уверены, что хотите удалить этот магазин? Это действие необратимо.
+            </div>
+            <div class="modal-footer">
+                <form th:action="@{/shop/delete}" method="post">
+                    <input type="hidden" th:value="${shop.id}" name="shopId"/>
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
