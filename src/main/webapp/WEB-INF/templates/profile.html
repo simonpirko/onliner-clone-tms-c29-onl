@@ -13,9 +13,10 @@
 <body>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="#">Onliner.by</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -33,36 +34,31 @@
 </nav>
 
 
-
-<div class="profile-header">
-    <div class="container text-center">
-
-
-        <h1>Профиль пользователя</h1>
-
+<div class="container">
+    <div class="row">
+        <div class="col-12 md-4 mb-4 text-center">
+            <h1>Профиль пользователя</h1>
+        </div>
     </div>
-</div>
-
-
-
-<div class="container content-section">
     <div class="row">
         <div class="col-md-4 text-center">
             <div class="profile-img">
                 <img src="https://via.placeholder.com/150" alt="Аватарка профиля">
             </div>
-            <h2 th:text="${username}">Иван Иванов</h2>
-            <p class="text-muted">Участник с <span th:text="${joinDate}">2024</span> года</p>
-            <button class="btn btn-primary">Редактировать профиль</button>
+            <div class="col mt-4 text-center">
+                <button class="btn btn-primary">Редактировать профиль</button>
+            </div>
         </div>
 
         <div class="col-md-8">
-            <div class="card mb-3">
+            <div class="card text-center">
                 <div class="card-header">Информация</div>
                 <div class="card-body">
-                    <h5 class="card-title">Контактная информация</h5>
-                    <p>Email: <span th:text="${email}">ivanov@example.com</span></p>
-                    <p>Телефон: <span th:text="${phone}">+375 29 123-45-67</span></p>
+                    <h2 th:text="${name}"></h2>
+
+                    <h2 th:text="${username}"></h2>
+
+                    <p>Тип аккаунта: <span th:text="${type}"></span></p>
                 </div>
             </div>
         </div>

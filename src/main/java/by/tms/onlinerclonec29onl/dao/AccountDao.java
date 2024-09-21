@@ -3,6 +3,7 @@ package by.tms.onlinerclonec29onl.dao;
 import by.tms.onlinerclonec29onl.dao.mapper.AccountRowMapper;
 import by.tms.onlinerclonec29onl.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -38,7 +39,11 @@ public class AccountDao {
     }
 
     public Optional<Account> getById(long id) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id));
+        try {
+            return Optional.of(jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id));
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     public int delete(Account account) {
