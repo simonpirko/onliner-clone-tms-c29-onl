@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-RU-Compatible" content="ie=edge">
     <title>Профиль пользователя</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +22,9 @@
                 <a class="nav-link active" aria-current="page" href="#">Главная</a>
                 <a class="nav-link" href="#">Магазин</a>
                 <a class="nav-link" href="#">Профиль</a>
+                <a class="nav-link" href="#">Отзывы</a>
                 <a class="nav-link" href="#">Карзина</a>
+
                 <a class="nav-link disabled" aria-disabled="true">Выход</a>
             </div>
         </div>
@@ -44,44 +44,24 @@
 
 
 
-
 <div class="container content-section">
     <div class="row">
-
-        <div class="text-center">
+        <div class="col-md-4 text-center">
             <div class="profile-img">
                 <img src="https://via.placeholder.com/150" alt="Аватарка профиля">
             </div>
-            <h2>Иван Иванов</h2>
-            <p class="text-muted">Участник с 2024 года</p>
-
+            <h2 th:text="${username}">Иван Иванов</h2>
+            <p class="text-muted">Участник с <span th:text="${joinDate}">2024</span> года</p>
             <button class="btn btn-primary">Редактировать профиль</button>
-
         </div>
 
-        <div class="col mt-3">
+        <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-header">Информация</div>
                 <div class="card-body">
-                    <h5 class="card-title">Обо мне</h5>
-                    <p class="card-text">Меня зовут Иван, я занимаюсь программированием. Увлекаюсь путешествиями и фотографиями.</p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">Мои достижения</div>
-                <div class="card-body">
-                    <ul>
-                        <li>Куплено товаров: 35</li>
-                        <li>Оставлено отзывов: 12</li>
-                        <li>Участие в обсуждениях: 54</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header">Контактная информация</div>
-                <div class="card-body">
-                    <p>Email: ivanov@example.com</p>
-                    <p>Телефон: +375 29 123-45-67</p>
+                    <h5 class="card-title">Контактная информация</h5>
+                    <p>Email: <span th:text="${email}">ivanov@example.com</span></p>
+                    <p>Телефон: <span th:text="${phone}">+375 29 123-45-67</span></p>
                 </div>
             </div>
         </div>
