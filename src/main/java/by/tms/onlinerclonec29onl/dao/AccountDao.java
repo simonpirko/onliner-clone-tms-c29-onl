@@ -3,6 +3,7 @@ package by.tms.onlinerclonec29onl.dao;
 import by.tms.onlinerclonec29onl.dao.mapper.AccountRowMapper;
 import by.tms.onlinerclonec29onl.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +24,8 @@ public class AccountDao {
                 account.getName(),
                 account.getUsername(),
                 account.getPassword(),
-                account.getType().toString().toUpperCase(),
-                account.getRole().toString().toUpperCase());
+                account.getType().name(),
+                account.getRole().name());
     }
 
     public int update(Account account) {
@@ -32,13 +33,21 @@ public class AccountDao {
                 account.getName(),
                 account.getUsername(),
                 account.getPassword(),
-                account.getType().toString().toUpperCase(),
-                account.getRole().toString().toUpperCase(),
+                account.getType().name(),
+                account.getRole().name(),
                 account.getId());
     }
 
     public Optional<Account> getById(long id) {
         return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id));
+    }
+
+    public Optional<Account> getByUsername(String username) {
+        try {
+            return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where username = ?", accountRowMapper, username));
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     public int delete(Account account) {
