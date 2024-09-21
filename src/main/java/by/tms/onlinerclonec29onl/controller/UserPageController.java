@@ -32,7 +32,7 @@ public class UserPageController {
 
             return "profile";
         } else {
-            return "error/404";  // Показать страницу ошибки, если аккаунт не найден
+            return "error/404";
         }
     }
 }
