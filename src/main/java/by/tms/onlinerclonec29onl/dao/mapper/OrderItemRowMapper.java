@@ -20,7 +20,7 @@ public class OrderItemRowMapper implements RowMapper<OrderItem> {
         orderItem.setId(rs.getLong("main_orderitem_id"));
         orderItem.setProduct(productRowMapper.mapRow(rs, rowNum));
         orderItem.setQuantity(rs.getInt("quantity"));
-        orderItem.setPrice(rs.getDouble("price"));
+        orderItem.setPrice(rs.getBigDecimal("price"));
         return orderItem;
     }
 }

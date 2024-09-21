@@ -23,7 +23,7 @@ public class SellerProductRowMapper implements RowMapper<SellerProduct> {
         sellerProduct.setId(rs.getLong("seller_product_id"));
         sellerProduct.setProduct(productRowMapper.mapRow(rs, rowNum));
         sellerProduct.setShop(shopRowMapper.mapRow(rs, rowNum));
-        sellerProduct.setPrice(rs.getDouble("price"));
+        sellerProduct.setPrice(rs.getBigDecimal("price"));
         return sellerProduct;
     }
 }

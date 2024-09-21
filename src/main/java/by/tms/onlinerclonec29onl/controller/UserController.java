@@ -9,17 +9,11 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 @Controller
 @RequestMapping("/")
-public class UserPageController {
+public class UserController {
 
-    @GetMapping("/profile")
-    public String getProfile(Model model) {
+    @GetMapping("/user")
+    public String getUser() {
 
-
-
-        model.addAttribute("username", "Иван Иванов");
-        model.addAttribute("joinDate", "2024");
-        model.addAttribute("email", "ivanov@example.com");
-        model.addAttribute("phone", "+375 29 123-45-67");
-        return "profile";
+        return "user";
     }
 }
