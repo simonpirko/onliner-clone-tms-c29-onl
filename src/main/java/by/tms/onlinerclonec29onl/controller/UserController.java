@@ -20,6 +20,7 @@ public class UserController {
         this.accountService = accountService;
     }
 
+
     @GetMapping("/user/{id}")
     public String getUser(@PathVariable("id") long id, Model model) {
         Optional<Account> accountOptional = accountService.findById(id);
@@ -31,14 +32,24 @@ public class UserController {
         }
     }
 
+
     @PostMapping("/user/save")
     public String saveUser(@ModelAttribute("account") Account account) {
-        if (account.getRole() == null) {
-            account.setRole(Account.Role.USER);
+        Optional<Account> existingAccount = accountService.findById(account.getId());
+
+        if (existingAccount.isPresent()) {
+            Account updatedAccount = existingAccount.get();
+            updatedAccount.setName(account.getName());
+            updatedAccount.setUsername(account.getUsername());
+            updatedAccount.setType(account.getType());
+            updatedAccount.setRole(account.getRole());
+
+            accountService.updateAccount(updatedAccount);
+        } else {
+
+            accountService.updateAccount(account);
         }
 
-        accountService.updateAccount(account);
-        return "profile";
+        return "redirect:/user/" + account.getId();
     }
-
 }
