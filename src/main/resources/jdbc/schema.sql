@@ -1,6 +1,3 @@
-DROP SCHEMA public CASCADE;
-
-CREATE SCHEMA public;
 
 CREATE TABLE if not exists account
 (
