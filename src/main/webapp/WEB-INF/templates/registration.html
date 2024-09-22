@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="_bootstrap::link">
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Регистрация</title>
 </head>
 <body>
 <header th:insert="_header::header"></header>
@@ -17,12 +18,12 @@
                     <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputUsername1" class="form-label">Username</label>
+                    <label for="exampleInputUsername1" class="form-label">Имя пользователя</label>
                     <input type="text" th:field="*{username}" class="form-control" id="exampleInputUsername1">
                     <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <label for="exampleInputPassword1" class="form-label">Пароль</label>
                     <input type="password" th:field="*{password}" class="form-control" id="exampleInputPassword1">
                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 

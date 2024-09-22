@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="_bootstrap::link">
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Вход</title>
 </head>
 <body>
 <header th:insert="_header::header"></header>
@@ -12,12 +13,12 @@
             <!--/*@thymesVar id="loginAccountDto" type="by.tms.onlinerclonec29onl.model.dto.LoginAccountDto"*/-->
             <form th:action="@{/login}" th:object="${loginAccountDto}" method="post">
                 <div class="mb-3">
-                    <label for="exampleInputUsername1" class="form-label">Username</label>
+                    <label for="exampleInputUsername1" class="form-label">Имя пользователя</label>
                     <input type="text" th:field="*{username}" class="form-control" id="exampleInputUsername1">
                     <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <label for="exampleInputPassword1" class="form-label">Пароль</label>
                     <input type="password" th:field="*{password}" class="form-control" id="exampleInputPassword1">
                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 
@@ -26,7 +27,7 @@
                 <!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
                 <!--                    <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
                 <!--                </div>-->
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100">Вход</button>
             </form>
             <div class="row text-center">
                 <p th:if="${errorMessage != null}" th:text="${errorMessage}"></p>
