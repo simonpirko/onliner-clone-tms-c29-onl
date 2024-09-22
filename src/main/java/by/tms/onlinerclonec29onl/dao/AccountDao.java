@@ -24,8 +24,8 @@ public class AccountDao {
                 account.getName(),
                 account.getUsername(),
                 account.getPassword(),
-                account.getType().toString().toUpperCase(),
-                account.getRole().toString().toUpperCase());
+                account.getType().name(),
+                account.getRole().name());
     }
 
     public int update(Account account) {
@@ -33,14 +33,22 @@ public class AccountDao {
                 account.getName(),
                 account.getUsername(),
                 account.getPassword(),
-                account.getType().toString().toUpperCase(),
-                account.getRole().toString().toUpperCase(),
+                account.getType().name(),
+                account.getRole().name(),
                 account.getId());
     }
 
     public Optional<Account> getById(long id) {
         try {
             return Optional.of(jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id));
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<Account> getByUsername(String username) {
+        try {
+            return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where username = ?", accountRowMapper, username));
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
