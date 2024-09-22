@@ -76,5 +76,6 @@ public class SellerProductController {
         }
         return "redirect:/shopProducts";
     }
+
 }
 
