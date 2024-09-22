@@ -39,7 +39,11 @@ public class AccountDao {
     }
 
     public Optional<Account> getById(long id) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id));
+        try {
+            return Optional.of(jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id));
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     public Optional<Account> getByUsername(String username) {
