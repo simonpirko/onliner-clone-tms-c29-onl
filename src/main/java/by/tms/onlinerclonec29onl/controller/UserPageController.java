@@ -26,13 +26,14 @@ public class UserPageController {
 
         if (accountOptional.isPresent()) {
             Account account = accountOptional.get();
+            model.addAttribute("ID", account.getId());
             model.addAttribute("username", account.getUsername());
             model.addAttribute("name", account.getName());
             model.addAttribute("type", account.getType());
 
             return "profile";
         } else {
-            return "error/404";
+            return "error";
         }
     }
 }
