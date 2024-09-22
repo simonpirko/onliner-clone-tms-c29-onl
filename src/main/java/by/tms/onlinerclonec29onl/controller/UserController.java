@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/")
 public class UserController {
@@ -20,10 +22,13 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public String getUser(@PathVariable("id") long id, Model model) {
-
-        Account account = accountService.findById(id).orElseThrow(() -> new IllegalArgumentException("Не верный ID:" + id));
-        model.addAttribute("account", account);
-        return "user";
+        Optional<Account> accountOptional = accountService.findById(id);
+        if (accountOptional.isPresent()) {
+            model.addAttribute("account", accountOptional.get());
+            return "user";
+        } else {
+            throw new IllegalArgumentException("Неверный ID пользователя: " + id);
+        }
     }
 
     @PostMapping("/user/save")
@@ -31,7 +36,9 @@ public class UserController {
         if (account.getRole() == null) {
             account.setRole(Account.Role.USER);
         }
+
         accountService.updateAccount(account);
         return "redirect:/profile/" + account.getId();
     }
+
 }
