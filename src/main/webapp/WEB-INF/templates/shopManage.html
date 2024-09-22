@@ -2,11 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Управление Магазином</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<header th:insert="_header::header"></header>
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Управление Магазином</h1>
@@ -46,7 +48,7 @@
     </div>
 </div>
 
-<!-- Модальное окно для удаления магазина -->
+
 <!--/*@thymesVar id="shop" type="by.tms.onlinerclonec29onl.model.Shop"*/-->
 <div th:object="${shop}" class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

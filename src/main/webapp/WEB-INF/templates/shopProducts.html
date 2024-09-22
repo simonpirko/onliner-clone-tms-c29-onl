@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Управление Товарами</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -15,6 +16,8 @@
 <!--/*@thymesVar id="allMainProducts" type="java.util.List"*/-->
 <!--/*@thymesVar id="price" type="by.tms.onlinerclonec29onl.model.SellerProduct"*/-->
 <!--/*@thymesVar id="product" type="by.tms.onlinerclonec29onl.model.Product"*/-->
+
+<header th:insert="_header::header"></header>
 
 <div class="container mt-5">
   <h1 class="text-center mb-4">Управление Товарами</h1>
@@ -31,7 +34,7 @@
       </thead>
       <tbody>
       <tr th:each="sellerProduct : ${sellerProducts}">
-        <td th:text="${sellerProduct.product.getName}"></td>
+        <td th:text="${sellerProduct.product.name}"></td>
         <td>
           <form th:action="@{/shop/products/update}" method="post" class="form-inline">
             <input type="hidden" th:value="${sellerProduct.id}" name="sellerProductId"/>
@@ -56,7 +59,6 @@
     <p class="alert alert-info text-center">Нет товаров в магазине.</p>
   </div>
 
-  <!-- Форма добавления товара -->
 
   <div class="card mt-4" th:object="${mainProduct}">
     <div class="card-header">
