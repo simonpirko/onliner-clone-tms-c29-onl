@@ -58,7 +58,7 @@ public class SellerProductController {
     public String deleteProduct(@RequestBody SellerProduct sellerProduct, @SessionAttribute("account") Account account) {
         Optional<Shop> shop = shopService.getShopByCreatorId(account.getId());
         if (shop.isPresent()) {
-            sellerProductService.delete(sellerProduct);
+            sellerProductService.delete(sellerProduct);    //TODO  передается айди, а надо объект
         }
         return "redirect:/shopProducts";
     }
