@@ -38,7 +38,7 @@ public class UserController {
         }
 
         accountService.updateAccount(account);
-        return "redirect:/profile/" + account.getId();
+        return "profile";
     }
 
 }
