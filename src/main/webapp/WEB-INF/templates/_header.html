@@ -1,26 +1,46 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <a class="navbar-brand ps-5" href="#">Onliner.by</a>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Onliner.by</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/">Главная</a>
-                <a th:if="${session.account != null}" class="nav-link" href="/">Магазин</a>
-                <a th:if="${session.account != null}" class="nav-link" th:href="@{/profile/{id}(id=${session.account.id})}">Профиль</a>
-                <a th:if="${session.account != null}" class="nav-link" href="/">Отзывы</a>
-                <a th:if="${session.account != null}" class="nav-link" href="/">Корзина</a>
-                <a th:if="${session.account == null}" class="nav-link" href="/login">Войти</a>
-                <a th:if="${session.account == null}" class="nav-link" href="/registration">Регистрация</a>
-                <a th:if="${session.account != null}" class="nav-link" href="/logout">Выйти</a>
-
-                <a th:if="${session.account == null}" class="nav-link disabled" aria-disabled="true">Привет, Гость!</a>
-                <a th:if="${session.account != null}" th:text="'Привет, ' + ${session.account.getUsername()} + '!'"
-                   class="nav-link disabled" aria-disabled="true">Привет, Гость!</a>
-
-            </div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a th:if="${session.account != null}" class="nav-link" href="/">Магазин</a>
+                </li>
+                <li class="nav-item">
+                    <a th:if="${session.account != null}" class="nav-link"
+                       th:href="@{/profile/}">Профиль</a>
+                </li>
+                <li class="nav-item">
+                    <a th:if="${session.account != null}" class="nav-link" href="/">Отзывы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Корзина <span class="badge text-bg-secondary" th:text="${session.cart.getProducts().size()}"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a th:if="${session.account == null}" class="nav-link" href="/login">Войти</a>
+                </li>
+                <li class="nav-item">
+                    <a th:if="${session.account == null}" class="nav-link" href="/registration">Регистрация</a>
+                </li>
+                <li class="nav-item">
+                    <a th:if="${session.account != null}" class="nav-link" href="/logout">Выйти</a>
+                </li>
+                <li class="nav-item">
+                    <a th:if="${session.account == null}" class="nav-link disabled" aria-disabled="true">Привет,
+                        Гость!</a>
+                    <a th:if="${session.account != null}" th:text="'Привет, ' + ${session.account.getUsername()} + '!'"
+                       class="nav-link disabled" aria-disabled="true">Привет, Гость!</a>
+                </li>
+            </ul>
         </div>
+    </div>
 </nav>
 </html>

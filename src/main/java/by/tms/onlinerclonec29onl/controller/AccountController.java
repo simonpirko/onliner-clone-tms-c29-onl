@@ -65,4 +65,28 @@ public class AccountController {
         return "redirect:/";
     }
 
+    @GetMapping("/profile/")
+    public String getProfile(HttpSession session, Model model) {
+        model.addAttribute("account", session.getAttribute("account"));
+        return "profile";
+    }
+
+    @GetMapping("/profile/update")
+    public String getProfileUpdate(HttpSession session, Model model) {
+        model.addAttribute("account", session.getAttribute("account"));
+        return "profileUpdate";
+    }
+
+
+    @PostMapping("profile/update")
+    public String saveProfileUpdate(@ModelAttribute("account") Account account, HttpSession session, Model model) {
+        account.setName(account.getName());
+        account.setUsername(account.getUsername());
+        account.setType(account.getType());
+        account.setRole(account.getRole());
+        accountService.updateAccount(account);
+        session.setAttribute("account", account);
+        model.addAttribute("message", "Изменения успешно сохранены!");
+        return "profileUpdate";
+    }
 }
