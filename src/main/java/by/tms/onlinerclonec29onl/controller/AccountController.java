@@ -36,8 +36,8 @@ public class AccountController {
             session.setAttribute("account", account.get());
             return "redirect:/";
         }
-        model.addAttribute("account", account);
-        model.addAttribute("errorMessage", "Invalid username or password");
+        model.addAttribute("loginAccountDto", new LoginAccountDto());
+        model.addAttribute("errorMessage", "Неверное имя пользователя или пароль!");
         return "login";
     }
 
