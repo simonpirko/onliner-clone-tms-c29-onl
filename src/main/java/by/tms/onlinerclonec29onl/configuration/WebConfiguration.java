@@ -38,6 +38,7 @@ public class WebConfiguration {
         templateResolver.setSuffix(getGetThymeleafSuffix);
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setCacheable(getGetThymeleafCache);
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
 

@@ -43,28 +43,33 @@ public class SellerProductController {
     }
 
     @PostMapping("/update")
-    public String updateProductPrice(@RequestParam Long sellerProductId, @RequestParam BigDecimal price, @SessionAttribute("account") Account account) {
+    public String updateProductPrice(@RequestParam("productId") Long productId, @RequestParam("sellerProductId") Long sellerProductId, @RequestParam("price") BigDecimal price, @SessionAttribute("account") Account account) {
+        Optional<Shop> shop = shopService.getShopByCreatorId(account.getId());
+        Optional<Product> product = productService.getById(productId);
+        if (shop.isPresent() && product.isPresent()) {
+            SellerProduct sellerProduct = new SellerProduct();
+            sellerProduct.setId(sellerProductId);
+            sellerProduct.setProduct(product.get());
+            sellerProduct.setPrice(price);
+            sellerProduct.setShop(shop.get());
+            sellerProductService.update(sellerProduct);
+        }
+        return "redirect:/shop/products";
+    }
+
+    @PostMapping("/delete")
+    public String deleteProduct(@RequestParam("sellerProductId") Long sellerProductId, @SessionAttribute("account") Account account) {
         Optional<Shop> shop = shopService.getShopByCreatorId(account.getId());
         if (shop.isPresent()) {
             SellerProduct sellerProduct = new SellerProduct();
             sellerProduct.setId(sellerProductId);
-            sellerProduct.setPrice(price);
-            sellerProductService.update(sellerProduct);
+            sellerProductService.delete(sellerProduct);
         }
-        return "redirect:/shopProducts";
-    }
-
-    @PostMapping("/delete")
-    public String deleteProduct(@RequestBody SellerProduct sellerProduct, @SessionAttribute("account") Account account) {
-        Optional<Shop> shop = shopService.getShopByCreatorId(account.getId());
-        if (shop.isPresent()) {
-            sellerProductService.delete(sellerProduct);    //TODO  передается айди, а надо объект
-        }
-        return "redirect:/shopProducts";
+        return "redirect:/shop/products";
     }
 
     @PostMapping("/add")
-    public String addProductToShop(@RequestParam Long productId, @RequestParam BigDecimal price, @SessionAttribute("account") Account account) {
+    public String addProductToShop(@RequestParam("productId") Long productId, @RequestParam("price") BigDecimal price, @SessionAttribute("account") Account account) {
         Optional<Shop> shop = shopService.getShopByCreatorId(account.getId());
         Optional<Product> mainProduct = productService.getById(productId);
         if (shop.isPresent() && mainProduct.isPresent()) {
@@ -74,7 +79,7 @@ public class SellerProductController {
             sellerProduct.setPrice(price);
             sellerProductService.save(sellerProduct);
         }
-        return "redirect:/shopProducts";
+        return "redirect:/shop/products";
     }
 
 }

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Управление Товарами</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <!--/*@thymesVar id="sellerProduct" type="by.tms.onlinerclonec29onl.model.SellerProduct"*/-->
@@ -22,7 +22,6 @@
 <div class="container mt-5">
   <h1 class="text-center mb-4">Управление Товарами</h1>
 
-
   <div th:if="${sellerProducts.size() > 0}" th:object="${sellerProduct}">
     <table class="table table-striped">
       <thead>
@@ -36,17 +35,18 @@
       <tr th:each="sellerProduct : ${sellerProducts}">
         <td th:text="${sellerProduct.product.name}"></td>
         <td>
-          <form th:action="@{/shop/products/update}" method="post" class="form-inline">
+          <form th:action="@{/shop/products/update}" method="post" class="d-inline">
             <input type="hidden" th:value="${sellerProduct.id}" name="sellerProductId"/>
-            <div class="form-group">
-              <input type="number" class="form-control mr-2" name="price" th:value="${sellerProduct.price}" required>
+            <input type="hidden" th:value="${sellerProduct.product.id}" name="productId"/>
+            <div class="input-group">
+              <input type="number" class="form-control" name="price" th:value="${sellerProduct.price}" required>
               <button type="submit" class="btn btn-success">Обновить</button>
             </div>
           </form>
         </td>
         <td>
           <form th:action="@{/shop/products/delete}" method="post" class="d-inline">
-            <input type="hidden" th:value="${sellerProduct}" name="sellerProduct"/>
+            <input type="hidden" th:value="${sellerProduct.id}" name="sellerProductId"/>
             <button type="submit" class="btn btn-danger">Удалить</button>
           </form>
         </td>
@@ -55,7 +55,7 @@
     </table>
   </div>
 
-  <div th:if="${products.size() == 0}">
+  <div th:if="${sellerProducts.size() == 0}">
     <p class="alert alert-info text-center">Нет товаров в магазине.</p>
   </div>
 
@@ -66,15 +66,15 @@
     </div>
     <div class="card-body">
       <form th:action="@{/shop/products/add}" method="post">
-        <div class="form-group">
-          <label for="productId">Выберите товар</label>
-          <select class="form-control" id="productId" name="productId" required>
+        <div class="mb-3">
+          <label for="productId" class="form-label">Выберите товар</label>
+          <select class="form-select" id="productId" name="productId" required>
             <option th:each="mainProduct : ${allMainProducts}" th:value="${mainProduct.id}" th:text="${mainProduct.name}"></option>
           </select>
         </div>
 
-        <div class="form-group">
-          <label for="price">Цена</label>
+        <div class="mb-3">
+          <label for="price" class="form-label">Цена</label>
           <input type="number" class="form-control" id="price" name="price" required>
         </div>
 
@@ -84,8 +84,7 @@
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
