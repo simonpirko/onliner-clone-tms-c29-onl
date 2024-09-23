@@ -25,21 +25,33 @@ public class ShopController {
     }
 
     @PostMapping("/update")
-    public String updateShop(@RequestParam Long shopId, @RequestParam String title, @RequestParam String description, @SessionAttribute("account") Account account) {
+    public String updateShop(@RequestParam("shopId") Long shopId, @RequestParam("title") String title, @RequestParam("description") String description, @SessionAttribute("account") Account account) {
         Optional<Shop> shop = shopService.getShopByCreatorId(account.getId());
         if (shop.isPresent()) {
             shopService.updateShop(new Shop(shopId, title, description, account));
         }
-        return "redirect:/shopManage";
+        return "redirect:/shop/manage";
     }
 
     @PostMapping("/delete")
-    public String deleteShop(@RequestParam Long shopId, @SessionAttribute("account") Account account) {
+    public String deleteShop(@RequestParam("shopId") Long shopId, @SessionAttribute("account") Account account) {
         Optional<Shop> shop = shopService.getShopByCreatorId(account.getId());
         if (shop.isPresent()) {
             shopService.deleteShop(shopId);
         }
-        return "redirect:/index";
+        return "redirect:/";
+    }
+
+
+    @PostMapping("/create")
+    public String createShop(@RequestParam("title") String title, @RequestParam("description") String description, @SessionAttribute("account") Account account) {
+        Shop shop = Shop.builder()
+                .title(title)
+                .description(description)
+                .creator(account)
+                .build();
+        shopService.createShop(shop);
+        return "redirect:/shop/manage";
     }
 }
 
