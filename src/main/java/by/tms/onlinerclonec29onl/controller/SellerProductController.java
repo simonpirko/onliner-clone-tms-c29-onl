@@ -35,6 +35,13 @@ public class SellerProductController {
         if (shop.isPresent()) {
             List<SellerProduct> sellerProducts = sellerProductService.getAllProductsByShop(shop.get().getId());
             List<Product> allMainProducts = productService.getAll();
+            for (int i = 0; i < sellerProducts.size(); i++) {
+                for (int j = 0; j < allMainProducts.size(); j++) {
+                    if(sellerProducts.get(i).getProduct().getId().equals(allMainProducts.get(j).getId())) {
+                        allMainProducts.remove(j);
+                    }
+                }
+            }
             model.addAttribute("sellerProducts", sellerProducts);
             model.addAttribute("shopId", shop.get().getId());
             model.addAttribute("allMainProducts", allMainProducts);
