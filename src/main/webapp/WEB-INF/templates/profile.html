@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="_bootstrap::link">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Профиль пользователя</title>
+
+
+
+</head>
+
+<body>
+
+
+<header th:insert="_header.html"></header>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 mt-5 text-center">
+            <div class="profile-img">
+                <img src="https://via.placeholder.com/150" alt="Аватарка профиля">
+            </div>
+            <div class="col mt-4 text-center">
+                <a class="btn btn-primary" href="/profile/update" role="button">Редактировать профиль</a>
+            </div>
+        </div>
+
+
+        <div class="col-md-8 mt-5">
+            <div class="card">
+                <div class="card-header"><h4>Информация о профиле пользователя</h4></div>
+                <!--/*@thymesVar id="account" type="by.tms.onlinerclonec29onl.model.Account"*/-->
+                <div class="card-body" th:object="${account}">
+                    <h2 th:text="*{name}"></h2>
+
+                    <h2 th:text="*{username}"></h2>
+
+                    <p>Тип аккаунта: <span th:text="*{getType().name()}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:insert="_bootstrap::script"></th:block>
+
+
+</body>
+
+</html>

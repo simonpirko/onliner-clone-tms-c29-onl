@@ -1,7 +1,6 @@
 package by.tms.onlinerclonec29onl.dao.mapper;
 
 import by.tms.onlinerclonec29onl.model.SellerProduct;
-import by.tms.onlinerclonec29onl.model.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -23,7 +22,7 @@ public class SellerProductRowMapper implements RowMapper<SellerProduct> {
         sellerProduct.setId(rs.getLong("seller_product_id"));
         sellerProduct.setProduct(productRowMapper.mapRow(rs, rowNum));
         sellerProduct.setShop(shopRowMapper.mapRow(rs, rowNum));
-        sellerProduct.setPrice(rs.getDouble("price"));
+        sellerProduct.setPrice(rs.getBigDecimal("price"));
         return sellerProduct;
     }
 }

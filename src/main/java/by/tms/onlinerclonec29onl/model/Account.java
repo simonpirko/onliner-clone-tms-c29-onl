@@ -1,5 +1,6 @@
 package by.tms.onlinerclonec29onl.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Data
@@ -9,8 +10,11 @@ import lombok.*;
 @ToString
 public class Account {
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
     private Type type;
     private Role role;

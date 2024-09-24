@@ -18,7 +18,7 @@ public class OrderRowMapper implements RowMapper<Order> {
         Order order = new Order();
         order.setId(rs.getLong("main_order_id"));
         order.setOrderItem(orderItemRowMapper.mapRow(rs, rowNum));
-        order.setTotalPrice(rs.getDouble("totalprice"));
+        order.setTotalPrice(rs.getBigDecimal("totalprice"));
         order.setStatus(Order.OrderStatus.valueOf(rs.getString("status").toUpperCase()));
         return order;
     }

@@ -23,8 +23,8 @@ public class AccountDao {
                 account.getName(),
                 account.getUsername(),
                 account.getPassword(),
-                account.getType().toString().toUpperCase(),
-                account.getRole().toString().toUpperCase());
+                account.getType().name(),
+                account.getRole().name());
     }
 
     public int update(Account account) {
@@ -32,13 +32,17 @@ public class AccountDao {
                 account.getName(),
                 account.getUsername(),
                 account.getPassword(),
-                account.getType().toString().toUpperCase(),
-                account.getRole().toString().toUpperCase(),
+                account.getType().name(),
+                account.getRole().name(),
                 account.getId());
     }
 
     public Optional<Account> getById(long id) {
         return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where id = ?", accountRowMapper, id));
+    }
+
+    public Optional<Account> getByUsername(String username) {
+        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where username = ?", accountRowMapper, username));
     }
 
     public int delete(Account account) {
