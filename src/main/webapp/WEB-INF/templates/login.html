@@ -2,38 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="_bootstrap::link">
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Вход</title>
 </head>
 <body>
-<header th:insert="_header::header"></header>
+<header th:insert="_header"></header>
 <div class="container">
-    <div class="row justify-content-center vh-100">
+    <div class="row justify-content-center min-vh-100">
         <div class="col-4 align-self-center">
             <!--/*@thymesVar id="loginAccountDto" type="by.tms.onlinerclonec29onl.model.dto.LoginAccountDto"*/-->
             <form th:action="@{/login}" th:object="${loginAccountDto}" method="post">
                 <div class="mb-3">
-                    <label for="exampleInputUsername1" class="form-label">Username</label>
+                    <label for="exampleInputUsername1" class="form-label">Имя пользователя</label>
                     <input type="text" th:field="*{username}" class="form-control" id="exampleInputUsername1">
-                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                    <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <label for="exampleInputPassword1" class="form-label">Пароль</label>
                     <input type="password" th:field="*{password}" class="form-control" id="exampleInputPassword1">
-                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-
+                    <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                 </div>
                 <!--                <div class="mb-3 form-check">-->
                 <!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
                 <!--                    <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
                 <!--                </div>-->
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100">Войти</button>
             </form>
             <div class="row text-center">
-                <p th:if="${errorMessage != null}" th:text="${errorMessage}"></p>
+                <p th:if="${errorMessage != null}" class="text-danger" th:text="${errorMessage}"></p>
             </div>
         </div>
     </div>
 </div>
-<script th:insert="_bootstrap::script"></script>
+<th:block th:insert="_bootstrap::script"></th:block>
 </body>
 </html>

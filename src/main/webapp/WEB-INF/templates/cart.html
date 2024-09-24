@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="_bootstrap::link">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Корзина</title>
+</head>
+<body>
+<header th:insert="_header"></header>
+<div class="container">
+    <div th:each="cartItem:${cartItems}">
+        <div class="row my-4 justify-content-center">
+            <div class="col-8">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" style="width: 150px" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${cartItem.getSellerProduct().getProduct().getName()}"></h5>
+                        <p class="card-text" th:text="${cartItem.getSellerProduct().getProduct().getDescription()}"></p>
+                        <h5 class="card-title" th:text="${cartItem.getSellerProduct().getShop().getTitle()}"></h5>
+                        <p class="card-text" th:text="${cartItem.getSellerProduct().getShop().getDescription()}"></p>
+                        <p class="card-text" th:text="${cartItem.getSellerProduct().getPrice()} + ' за один товар'"></p>
+                        <!--/*@thymesVar id="cartItem" type="by.tms.onlinerclonec29onl.model.CartItem"*/-->
+                        <form th:action="@{/order}" th:object="${cartItem}" method="post">
+                            <div class="mb-3">
+<!--                                <input type="number" th:field="*{quantity}" class="form-control">-->
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Перейти к оформлению</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:insert="_bootstrap::script"></th:block>
+</body>
+</html>

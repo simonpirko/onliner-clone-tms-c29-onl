@@ -34,10 +34,10 @@ public class AccountController {
         Optional<Account> account = accountService.login(loginAccountDto);
         if (account.isPresent()) {
             session.setAttribute("account", account.get());
-            return "redirect:/";
+            return "redirect:/profile/";
         }
-        model.addAttribute("account", account);
-        model.addAttribute("errorMessage", "Invalid username or password");
+        model.addAttribute("loginAccountDto", new LoginAccountDto());
+        model.addAttribute("errorMessage", "Неверное имя пользователя или пароль!");
         return "login";
     }
 
@@ -65,4 +65,36 @@ public class AccountController {
         return "redirect:/";
     }
 
+    @GetMapping("/profile/")
+    public String getProfile(HttpSession session, Model model) {
+        Account account = (Account) session.getAttribute("account");
+        if (account == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("account", account);
+        return "profile";
+    }
+
+    @GetMapping("/profile/update")
+    public String getProfileUpdate(HttpSession session, Model model) {
+        Account account = (Account) session.getAttribute("account");
+        if (account == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("account", account);
+        return "profileUpdate";
+    }
+
+
+    @PostMapping("profile/update")
+    public String saveProfileUpdate(@ModelAttribute("account") Account account, HttpSession session, Model model) {
+        account.setName(account.getName());
+        account.setUsername(account.getUsername());
+        account.setType(account.getType());
+        account.setRole(account.getRole());
+        accountService.updateAccount(account);
+        session.setAttribute("account", account);
+        model.addAttribute("message", "Изменения успешно сохранены!");
+        return "profileUpdate";
+    }
 }
