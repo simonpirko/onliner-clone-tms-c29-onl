@@ -34,7 +34,6 @@ public class AccountController {
         Optional<Account> account = accountService.login(loginAccountDto);
         if (account.isPresent()) {
             session.setAttribute("account", account.get());
-
             return "redirect:/profile/";
         }
         model.addAttribute("loginAccountDto", new LoginAccountDto());

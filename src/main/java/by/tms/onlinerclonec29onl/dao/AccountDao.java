@@ -45,6 +45,14 @@ public class AccountDao {
         return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where username = ?", accountRowMapper, username));
     }
 
+    public Optional<Account> getByUsername(String username) {
+        try {
+            return Optional.ofNullable(jdbcTemplate.queryForObject("select * from public.account where username = ?", accountRowMapper, username));
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
+
     public int delete(Account account) {
         return jdbcTemplate.update("delete from public.account where id = ?", account.getId());
     }
