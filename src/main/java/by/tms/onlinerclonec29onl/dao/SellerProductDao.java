@@ -22,6 +22,10 @@ public class SellerProductDao {
         return jdbcTemplate.query("select * from public.sellerproduct s join public.product p on s.product_id = p.main_product_id join public.shop s2 on s2.main_shop_id = s.shop_id join public.account a on a.id = s2.creator_id", sellerProductRowMapper);
     }
 
+    public List<SellerProduct> getSellerProductByProductId(Long id) {
+        return jdbcTemplate.query("select * from public.sellerproduct s join public.product p on s.product_id = p.main_product_id join public.shop s2 on s2.main_shop_id = s.shop_id join public.account a on a.id = s2.creator_id where p.main_product_id = ?", sellerProductRowMapper, id);
+    }
+
     public int save(SellerProduct sellerProduct) {
         return jdbcTemplate.update("insert into sellerproduct (seller_product_id, product_id, shop_id, price) values (default, ?, ?, ?)",
                 sellerProduct.getProduct().getId(),
