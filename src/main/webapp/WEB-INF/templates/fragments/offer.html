@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer Fragment</title>
+</head>
+<body>
+<div th:fragment="offerFragment">
+    <div class="card" style="width: 200px;">
+        <!--TODO: Обновить получение картинки-->
+        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${sellerProduct.product.getName()}"></h5>
+            <p class="card-text" th:text="${sellerProduct.product.getDescription()}"></p>
+            <h5 class="card-title" th:text="${sellerProduct.shop.getTitle()}"></h5>
+            <p class="card-text" th:text="${sellerProduct.shop.getDescription()}"></p>
+            <p class="card-text" th:text="${sellerProduct.price}"></p>
+            <form th:action="@{/product/put}" method="POST">
+                <input class="form-control me-2"
+                       th:value="${sellerProduct.getId()}" type="hidden" name="sellerProductId">
+                <button type="submit" class="btn btn-outline-primary">В корзину</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

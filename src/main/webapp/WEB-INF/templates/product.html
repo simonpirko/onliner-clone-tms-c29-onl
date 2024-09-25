@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="_bootstrap::link">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Продукт</title>
+</head>
+<body>
+<header th:insert="_header.html"></header>
+<div class="container mt-2 ">
+    <div class="d-flex flex-row gap-3">
+        <div th:each="sellerProduct:${sellerProductList}" th:include="fragments/offer :: offerFragment"
+             th:object="${sellerProduct}"></div>
+    </div>
+
+</div>
+<th:block th:insert="_bootstrap::script"></th:block>
+</body>
+</html>
