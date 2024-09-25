@@ -32,4 +32,16 @@ public class ProductService {
     public List<Product> getAll() {
         return productDao.getAll();
     }
+
+    public List<String> getAllCategories() {
+        return productDao.getAllCategories();
+    }
+
+    public List<Product> getByCategory(String category) {
+        return productDao.getByCategory(category);
+    }
+
+    public List<Product> getByName(String name) {
+        return productDao.getByName(name);
+    }
 }
