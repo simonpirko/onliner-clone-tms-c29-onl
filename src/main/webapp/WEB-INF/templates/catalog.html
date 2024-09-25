@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="_bootstrap::link">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Каталог</title>
+</head>
+<body>
+<header th:insert="_header.html"></header>
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-md-3">
+            <h3 class="h3">Категории</h3>
+            <div style="max-width: 200px;" class="list-group">
+                <a th:each="category:${categories}" th:href="@{/catalog/{category}(category=${category})}"
+                   th:text="${category}"
+                   th:classappend="${activeCategory == category} ? 'active' : ''"
+                   class="list-group-item list-group-item-action"
+                   aria-current="true">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 justify-content-center">
+            <form class="d-flex" th:action="@{/catalog/search}" method="post">
+                <input class="form-control me-2" type="text" placeholder="Поиск" aria-label="Поиск" name="name"
+                       th:value="${productSearch}" required>
+                <button type="submit" class="btn btn-outline-primary">Искать</button>
+            </form>
+            <div class="mt-2">
+                <h1 class="h1" th:text="${activeCategory}"></h1>
+                <div class="mt-1 d-flex flex-row gap-3">
+                    <div th:each="product:${products}" th:include="fragments/product :: productFragment"
+                         th:object="${product}"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:insert="_bootstrap::script"></th:block>
+</body>
+</html>
