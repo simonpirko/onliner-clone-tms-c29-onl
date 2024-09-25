@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*TODO: кэширование категорий?*/
+
 @Controller
 @RequestMapping("/catalog")
 public class CatalogController {
