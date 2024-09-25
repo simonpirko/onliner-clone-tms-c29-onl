@@ -26,6 +26,7 @@
                     <label for="exampleInputPassword1" class="form-label">Пароль</label>
                     <input type="password" th:field="*{password}" class="form-control" id="exampleInputPassword1">
                     <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+
                 </div>
                 <!--                <div class="mb-3 form-check">-->
                 <!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
@@ -37,5 +38,6 @@
     </div>
 </div>
 <th:block th:insert="_bootstrap::script"></th:block>
+
 </body>
 </html>
