@@ -34,7 +34,7 @@ public class AccountController {
         Optional<Account> account = accountService.login(loginAccountDto);
         if (account.isPresent()) {
             session.setAttribute("account", account.get());
-            return "redirect:/profile/";
+            return "redirect:/";
         }
         model.addAttribute("loginAccountDto", new LoginAccountDto());
         model.addAttribute("errorMessage", "Неверное имя пользователя или пароль!");
@@ -67,21 +67,13 @@ public class AccountController {
 
     @GetMapping("/profile/")
     public String getProfile(HttpSession session, Model model) {
-        Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            return "redirect:/login";
-        }
-        model.addAttribute("account", account);
+        model.addAttribute("account", session.getAttribute("account"));
         return "profile";
     }
 
     @GetMapping("/profile/update")
     public String getProfileUpdate(HttpSession session, Model model) {
-        Account account = (Account) session.getAttribute("account");
-        if (account == null) {
-            return "redirect:/login";
-        }
-        model.addAttribute("account", account);
+        model.addAttribute("account", session.getAttribute("account"));
         return "profileUpdate";
     }
 

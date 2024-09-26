@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,5 +13,5 @@ import java.util.List;
 public class Cart {
     private Long id;
     private Account account;
-    private List<CartItem> products;
+    private List<CartItem> products = new ArrayList<>();
 }
