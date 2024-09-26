@@ -7,26 +7,65 @@
 </head>
 <body>
 <header th:insert="_header"></header>
-<div class="container">
-    <div th:each="cartItem:${cartItems}">
-        <div class="row my-4 justify-content-center">
-            <div class="col-8">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" style="width: 150px" alt="...">
+<div class="container my-4">
+    <div th:if="${session.cart.getProducts().isEmpty()}" class="row justify-content-center min-vh-100">
+        <div class="col-5 align-self-center text-center">
+            <h1>Ваша корзина пуста</h1>
+            <p>Перейдите в <a class="link-opacity-100" href="/">каталог</a> и добавьте товары.
+                Наполняли корзину ранее? <a class="link-opacity-100" href="login">Войдите на сайт</a>, и выбранные вами
+                товары появятся.</p>
+        </div>
+    </div>
+    <div th:if="${!session.cart.getProducts().isEmpty()}" th:each="shopId:${session.shopsId}">
+        <div class="card mb-5">
+            <div th:each="shop:${session.shops}" th:if="${shop.id == shopId.key}"
+                 class="row my-2">
+                <h5 class="card-title"
+                    th:text="${shop.title}"></h5>
+                <p class="card-text"
+                   th:text="${shop.description}"></p>
+            </div>
+            <div class="row mb-2" th:each="cartItem:${session.cart.getProducts()}"
+                 th:if="${cartItem.getSellerProduct().getShop().id == shopId.key}">
+                <div class="col-2 align-self-center">
+                    <img src="https://via.placeholder.com/150" class="card-img-top"
+                         alt="...">
+                </div>
+                <div class="col-4">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${cartItem.getSellerProduct().getProduct().getName()}"></h5>
-                        <p class="card-text" th:text="${cartItem.getSellerProduct().getProduct().getDescription()}"></p>
-                        <h5 class="card-title" th:text="${cartItem.getSellerProduct().getShop().getTitle()}"></h5>
-                        <p class="card-text" th:text="${cartItem.getSellerProduct().getShop().getDescription()}"></p>
-                        <p class="card-text" th:text="${cartItem.getSellerProduct().getPrice()} + ' за один товар'"></p>
-                        <!--/*@thymesVar id="cartItem" type="by.tms.onlinerclonec29onl.model.CartItem"*/-->
-                        <form th:action="@{/order}" th:object="${cartItem}" method="post">
-                            <div class="mb-3">
-<!--                                <input type="number" th:field="*{quantity}" class="form-control">-->
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Перейти к оформлению</button>
+                        <h5 class="card-title"
+                            th:text="${cartItem.getSellerProduct().getProduct().getName()}"></h5>
+                        <p class="card-text"
+                           th:text="${cartItem.getSellerProduct().getProduct().getDescription()}"></p>
+                    </div>
+                </div>
+                <div class="col-3 align-self-center">
+                    <div class="row justify-content-center">
+                        <form action="/cart" method="post">
+                            <input class="form-control w-50" type="number" th:value="${cartItem.quantity}" name="quantity" min="1">
+                            <p class="card-text" th:text="${cartItem.getSellerProduct().getPrice()} + ' р./шт.'"></p>
+                            <input type="hidden" th:value="${cartItem.id}" name="cartItemId">
+                            <button class="btn btn-primary" role="button">Применить</button>
                         </form>
                     </div>
+                </div>
+                <div class="col-3 align-self-center text-center">
+                    <div class="row justify-content-center">
+                        <p class="card-text"
+                           th:text="${cartItem.amount} + ' р. за ' + ${cartItem.quantity} + ' шт.'"></p>
+                        <form action="/cart/delete" method="post">
+                            <input type="hidden" th:value="${cartItem.id}" name="cartItemId">
+                            <button class="btn btn-danger" role="button">Удалить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-8 py-1">
+                    <p class="text-start border-top" th:text="'Стоимость всего ' + ${shopId.value} + ' р.'"></p>
+                </div>
+                <div class="col-4 py-1">
+                    <button type="submit" class="btn btn-primary border-top">Перейти к оформлению</button>
                 </div>
             </div>
         </div>
