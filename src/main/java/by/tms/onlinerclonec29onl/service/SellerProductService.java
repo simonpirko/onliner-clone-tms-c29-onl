@@ -38,4 +38,8 @@ public class SellerProductService {
     public List<SellerProduct> getAllProductsByShop(Long shopId) {
         return sellerProductDao.getAll().stream().filter(product -> product.getShop().getId().equals(shopId)).collect(Collectors.toList());
     }
+
+    public List<SellerProduct> getSellerProductByProductId(Long id) {
+        return sellerProductDao.getSellerProductByProductId(id);
+    }
 }
