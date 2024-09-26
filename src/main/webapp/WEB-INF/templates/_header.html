@@ -22,7 +22,11 @@
                     <a th:if="${session.account != null}" class="nav-link" href="/">Отзывы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cart">Корзина <span  class="badge text-bg-danger" th:if="${!session.cart.getProducts().isEmpty()}" th:text="${session.cart.getProducts().size()}"></span></a>
+                    <a class="nav-link" href="/cart">Корзина <span class="badge text-bg-secondary"
+                                                                   th:text="${session.cart.getProducts().size()}"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/catalog">Каталог</a>
                 </li>
                 <li class="nav-item">
                     <a th:if="${session.account == null}" class="nav-link" href="/login">Войти</a>

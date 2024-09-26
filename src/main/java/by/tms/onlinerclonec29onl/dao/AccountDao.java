@@ -3,6 +3,7 @@ package by.tms.onlinerclonec29onl.dao;
 import by.tms.onlinerclonec29onl.dao.mapper.AccountRowMapper;
 import by.tms.onlinerclonec29onl.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
