@@ -78,15 +78,33 @@ public class AccountController {
     }
 
 
-    @PostMapping("profile/update")
-    public String saveProfileUpdate(@ModelAttribute("account") Account account, HttpSession session, Model model) {
-        account.setName(account.getName());
-        account.setUsername(account.getUsername());
-        account.setType(account.getType());
-        account.setRole(account.getRole());
-        accountService.updateAccount(account);
-        session.setAttribute("account", account);
-        model.addAttribute("message", "Изменения успешно сохранены!");
-        return "profileUpdate";
+    @PostMapping("/profile/update")
+    public String saveProfileUpdate(@ModelAttribute("account") Account updatedAccount, HttpSession session, Model model) {
+        Account sessionAccount = (Account) session.getAttribute("account");
+
+        if (sessionAccount == null) {
+            return "redirect:/login";
+        }
+
+        Optional<Account> accountOpt = accountService.findById(sessionAccount.getId());
+
+        if (accountOpt.isPresent()) {
+            Account account = accountOpt.get();
+
+            account.setName(updatedAccount.getName());
+            account.setUsername(updatedAccount.getUsername());
+            account.setType(updatedAccount.getType());
+            account.setRole(updatedAccount.getRole());
+
+            accountService.updateAccount(account);
+
+            session.setAttribute("account", account);
+
+            model.addAttribute("message", "Изменения успешно сохранены!");
+            return "profileUpdate";
+        } else {
+            model.addAttribute("errorMessage", "Аккаунт не найден.");
+            return "profileUpdate";
+        }
     }
 }
