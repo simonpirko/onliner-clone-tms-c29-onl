@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:insert="_bootstrap::link">
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<header th:insert="_header::header"></header>
+<header th:insert="_header"></header>
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Управление Магазином</h1>
@@ -25,7 +25,8 @@
 
                     <div class="mb-3">
                         <label for="shopTitle">Название Магазина</label>
-                        <input type="text" class="form-control" id="shopTitle" name="title" th:value="${shop.title}" required>
+                        <input type="text" class="form-control" id="shopTitle" name="title" th:value="${shop.title}"
+                               required>
                     </div>
 
                     <div class="mb-3">
@@ -35,7 +36,9 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Обновить Магазин</button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Удалить Магазин</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        Удалить Магазин
+                    </button>
                     <a class="btn btn-primary" href="/shop/products" role="button">Мои товары</a>
                 </form>
             </div>
@@ -69,7 +72,8 @@
 
 
 <!--/*@thymesVar id="shop" type="by.tms.onlinerclonec29onl.model.Shop"*/-->
-<div th:object="${shop}" class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div th:object="${shop}" class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+     aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -90,8 +94,7 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<th:block th:insert="_bootstrap::script"></th:block>
 </body>
 </html>
 

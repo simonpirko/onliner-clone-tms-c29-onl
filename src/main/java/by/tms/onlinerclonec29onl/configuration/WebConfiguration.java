@@ -1,7 +1,6 @@
 package by.tms.onlinerclonec29onl.configuration;
 
 import by.tms.onlinerclonec29onl.Constants;
-import by.tms.onlinerclonec29onl.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -9,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
@@ -23,9 +21,6 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private ApplicationContext applicationContext;
-
-    @Autowired
-    LoginInterceptor loginInterceptor;
 
     @Value("${thymeleaf.prefix}")
     private String getThymeleafPrefix;
@@ -66,11 +61,5 @@ public class WebConfiguration implements WebMvcConfigurer {
         viewResolver.setTemplateEngine(templateEngine());
         viewResolver.setCharacterEncoding(getThymeleafCharacterEncoding);
         return viewResolver;
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/**");
-
     }
 }
