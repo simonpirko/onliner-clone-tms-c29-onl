@@ -17,10 +17,7 @@
                 </li>
                 <li class="nav-item">
                     <a th:if="${session.account != null && session.account.getRole().name() == 'ADMIN'}"
-                       class="nav-link" href="/admin/products"></a>
-                </li>
-                <li class="nav-item">
-                    <a th:if="${session.account != null}" class="nav-link" href="/">Магазин</a>
+                       class="nav-link" href="/admin/products">АдминПанель</a>
                 </li>
                 <li class="nav-item">
                     <a th:if="${session.account != null}" class="nav-link"

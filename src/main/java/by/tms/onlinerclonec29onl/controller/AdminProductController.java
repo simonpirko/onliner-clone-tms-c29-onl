@@ -3,6 +3,7 @@ package by.tms.onlinerclonec29onl.controller;
 
 import by.tms.onlinerclonec29onl.model.Product;
 import by.tms.onlinerclonec29onl.service.ProductService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
