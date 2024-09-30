@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
+import java.util.Base64;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,4 +18,8 @@ public class Product {
     private String description;
     private String category;
     private byte[] image;
+
+    public String getImageBase64() {
+        return Base64.getEncoder().encodeToString(image);
+    }
 }
