@@ -12,12 +12,10 @@
 </head>
 <body>
 
-<!-- Отображение товаров и формы для редактирования -->
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Управление Товарами</h1>
 
-    <!-- Список товаров -->
     <div th:if="${products.size() > 0}">
         <table class="table table-striped">
             <thead>
@@ -25,13 +23,14 @@
                 <th>Название</th>
                 <th>Категория</th>
                 <th>Описание</th>
+                <th>Картинка</th>
                 <th>Обновление</th>
                 <th>Удаление</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="product : ${products}">
-                <form th:action="@{/admin/products/update}" method="post">
+                <form th:action="@{/admin/products/update}" method="post" enctype="multipart/form-data">
                     <input type="hidden" th:value="${product.id}" name="id"/>
                     <td>
                         <input type="text" class="form-control" name="name" th:value="${product.name}" required/>
@@ -45,12 +44,12 @@
                                   th:text="${product.description}"></textarea>
                     </td>
 
-<!--                    <td>-->
-<!--                        <img th:if="${product.image != null}"-->
-<!--                             th:src="@{'data:image/png;base64,' + ${product.image}}"-->
-<!--                             alt="product image" width="100"/>-->
-<!--                        <input type="file" class="form-control mt-2" name="image"/>-->
-<!--                    </td>-->
+                    <td>
+                        <img th:if="${product.image != null}"
+                             th:src="@{'data:image/png;base64,' + ${product.getImageBase64()}}"
+                             alt="product image" width="100"/>
+                        <input type="file" class="form-control mt-2" name="image"/>
+                    </td>
                     <td>
                         <button type="submit" class="btn btn-success mb-2">Обновить</button>
                     </td>
@@ -70,13 +69,12 @@
         <p class="alert alert-info text-center">Нет товаров для отображения.</p>
     </div>
 
-    <!-- Форма добавления нового товара -->
     <div class="card mt-4">
         <div class="card-header">
             <h2>Добавить новый товар</h2>
         </div>
         <div class="card-body">
-            <form th:action="@{/admin/products/add}" method="post">
+            <form th:action="@{/admin/products/add}" method="post" enctype="multipart/form-data">
 <!--                enctype="multipart/form-data"-->
                 <div class="mb-3">
                     <label class="form-label">Название</label>
@@ -94,10 +92,10 @@
                               required></textarea>
                 </div>
 
-<!--                <div class="mb-3">-->
-<!--                    <label class="form-label">Картинка</label>-->
-<!--                    <input type="file" class="form-control"  name="image" required>-->
-<!--                </div>-->
+                <div class="mb-3">
+                    <label class="form-label">Картинка</label>
+                    <input type="file" class="form-control"  name="image" required>
+                </div>
 
                 <button type="submit" class="btn btn-primary">Добавить товар</button>
             </form>
