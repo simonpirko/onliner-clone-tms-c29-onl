@@ -23,15 +23,20 @@ public class SecurityFilter extends HttpFilter {
             req.getSession().setAttribute("cart", cart);
         }
         if (account == null && (req.getRequestURL().toString().contains("/profile") ||
-                req.getRequestURL().toString().contains("/shop"))) {
+                req.getRequestURL().toString().contains("/shop") ||
+                req.getRequestURL().toString().contains("/logout") ||
+                req.getRequestURL().toString().contains("/admin"))) {
             res.sendRedirect("/");
             return;
         }
         if (account != null) {
             if (req.getRequestURL().toString().contains("/registration") ||
-                    req.getRequestURL().toString().contains("/login") ||
-                    req.getRequestURL().toString().contains("/logout")) {
+                    req.getRequestURL().toString().contains("/login")) {
                 res.sendRedirect("/");
+                return;
+            }
+            if (account.getRole() == Account.Role.ADMIN) {
+                chain.doFilter(req, res);
                 return;
             }
             if (account.getType() != Account.Type.BUSINESS && req.getRequestURL().toString().contains("/shop")) {

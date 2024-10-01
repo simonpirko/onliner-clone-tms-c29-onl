@@ -12,8 +12,7 @@
                     <a class="nav-link active" aria-current="page" href="/">Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a th:if="${session.account != null && session.account.getType().name() == 'BUSINESS'}"
-                       class="nav-link" href="/shop/manage">Магазин</a>
+                    <a th:if="${session.account != null}" class="nav-link" href="/">Магазин</a>
                 </li>
                 <li class="nav-item">
                     <a th:if="${session.account != null}" class="nav-link"
