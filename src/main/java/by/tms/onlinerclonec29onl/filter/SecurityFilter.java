@@ -15,33 +15,41 @@ import java.io.IOException;
 
 @WebFilter(servletNames = "dispatcher")
 public class SecurityFilter extends HttpFilter {
+//TODO: заменить стандартную страницу Tomcat с ошибкой 404 на свою
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+        final String url = req.getRequestURL().toString();
         Account account = (Account) req.getSession().getAttribute("account");
         if (req.getSession().getAttribute("cart") == null) {
             Cart cart = new Cart();
             req.getSession().setAttribute("cart", cart);
         }
-        if (account == null && (req.getRequestURL().toString().contains("/profile") ||
-                req.getRequestURL().toString().contains("/shop") ||
-                req.getRequestURL().toString().contains("/logout") ||
-                req.getRequestURL().toString().contains("/admin"))) {
-            res.sendRedirect("/");
+        if (account == null && (url.contains("/profile") ||
+                url.contains("/shop") ||
+                url.contains("/logout") ||
+                url.contains("/admin"))) {
+            res.sendRedirect("/error");
             return;
         }
         if (account != null) {
-            if (req.getRequestURL().toString().contains("/registration") ||
-                    req.getRequestURL().toString().contains("/login")) {
-                res.sendRedirect("/");
+            if (url.contains("/registration") ||
+                    url.contains("/login")) {
+                res.sendRedirect("/error");
                 return;
             }
             if (account.getRole() == Account.Role.ADMIN) {
                 chain.doFilter(req, res);
                 return;
             }
-            if (account.getType() != Account.Type.BUSINESS && req.getRequestURL().toString().contains("/shop")) {
-                res.sendRedirect("/");
-                return;
+            if (account.getRole() == Account.Role.USER) {
+                if(url.contains("/admin")) {
+                    res.sendRedirect("/error");
+                    return;
+                }
+                if (account.getType() != Account.Type.BUSINESS && url.contains("/shop")) {
+                    res.sendRedirect("/error");
+                    return;
+                }
             }
         }
         chain.doFilter(req, res);

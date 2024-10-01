@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="_bootstrap::link">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Страница не найдена</title>
+</head>
+<body>
+<div class="container text-center" style="margin-top: 100px;">
+    <h1 th:text="'Ой! Ошибка 404!'"></h1>
+    <p class="lead">Мы не можем найти страницу, которую вы ищете.</p>
+    <a class="btn btn-primary" th:href="@{/}">Вернуться на главную</a>
+</div>
+<th:block th:insert="_bootstrap::script"></th:block>
+</body>
+</html>
