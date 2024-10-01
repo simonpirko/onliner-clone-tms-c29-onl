@@ -25,16 +25,18 @@ CREATE TABLE if not exists orderitem
     product_id BIGINT,
     quantity   INTEGER,
     price      DECIMAL(10, 2),
+    order_id BIGINT not null,
     FOREIGN KEY (product_id) REFERENCES product (main_product_id) ON DELETE CASCADE
 );
 
 CREATE TABLE if not exists "order"
 (
     main_order_id           BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    orderItem_id BIGINT,
     totalPrice   DECIMAL(10, 2),
     status       VARCHAR(50),
-    FOREIGN KEY (orderItem_id) REFERENCES orderItem (main_orderitem_id) ON DELETE CASCADE
+    delivery_address  VARCHAR(255),
+    account_id BIGINT not null
+    /*FOREIGN KEY (orderItem_id) REFERENCES orderItem (main_orderitem_id) ON DELETE CASCADE*/
 );
 
 CREATE TABLE if not exists shop

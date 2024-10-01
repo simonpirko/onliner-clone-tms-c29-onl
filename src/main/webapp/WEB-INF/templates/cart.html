@@ -65,7 +65,10 @@
                     <p class="text-start border-top" th:text="'Стоимость всего ' + ${shopId.value} + ' р.'"></p>
                 </div>
                 <div class="col-4 py-1">
-                    <button type="submit" class="btn btn-primary border-top">Перейти к оформлению</button>
+                    <form action="/order/shopOrder" method="post">
+                        <input type="hidden" th:value="${shopId.key}" name="shopId">
+                        <button type="submit" class="btn btn-primary border-top">Перейти к оформлению</button>
+                    </form>
                 </div>
             </div>
         </div>
