@@ -1,4 +1,5 @@
-
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
 CREATE TABLE if not exists account
 (
     id       BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -15,7 +16,7 @@ CREATE TABLE if not exists product
     product_name            VARCHAR(255),
     product_description     TEXT,
     product_category        VARCHAR(100),
-    product_image           VARCHAR(255)
+    product_image           bytea
 );
 
 CREATE TABLE if not exists orderitem
