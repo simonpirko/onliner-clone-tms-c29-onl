@@ -35,6 +35,7 @@ public class ProductController {
         Optional<SellerProduct> sellerProduct = sellerProductService.getById(id);
 
         if (sellerProduct.isPresent()) {
+            cartItem.setId(sellerProduct.get().getId());
             cartItem.setSellerProduct(sellerProduct.get());
             cartItem.setQuantity(1);
             cartItems.add(cartItem);

@@ -7,8 +7,7 @@
 <body>
 <div th:fragment="productFragment">
     <div class="card" style="width: 200px;">
-        <!--TODO: Обновить получение картинки-->
-        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+        <img th:src="@{'data:image/png;base64,' + ${product.getImageBase64()}}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title" th:text="${product.getName()}"></h5>
             <p class="card-text" th:text="${product.getDescription()}"></p>
