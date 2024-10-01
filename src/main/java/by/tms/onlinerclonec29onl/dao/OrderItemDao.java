@@ -19,18 +19,20 @@ public class OrderItemDao {
     private OrderItemRowMapper orderItemRowMapper;
 
     public int save(OrderItem orderItem) {
-        return jdbcTemplate.update("insert into public.orderitem (main_orderitem_id, product_id, quantity, price) values (default, ?, ?, ?)",
-                orderItem.getProduct().getId(),
-                orderItem.getQuantity(),
-                orderItem.getPrice());
-    }
-
-    public int update(OrderItem orderItem) {
-        return jdbcTemplate.update("update orderitem set product_id = ?, quantity = ?, price = ? where main_orderitem_id = ?",
+        return jdbcTemplate.update("insert into public.orderitem (main_orderitem_id, product_id, quantity, price, order_id) values (default, ?, ?, ?, ?)",
                 orderItem.getProduct().getId(),
                 orderItem.getQuantity(),
                 orderItem.getPrice(),
-                orderItem.getId());
+                orderItem.getOrderId());
+    }
+
+    public int update(OrderItem orderItem) {
+        return jdbcTemplate.update("update orderitem set product_id = ?, quantity = ?, price = ?, order_id = ? where main_orderitem_id = ?",
+                orderItem.getProduct().getId(),
+                orderItem.getQuantity(),
+                orderItem.getPrice(),
+                orderItem.getId(),
+                orderItem.getOrderId());
     }
 
     public Optional<OrderItem> getById(long id) {
@@ -42,6 +44,10 @@ public class OrderItemDao {
     }
 
     public List<OrderItem> getAll() {
+        return jdbcTemplate.query("select * from public.orderitem o join public.product p on o.product_id = p.main_product_id", orderItemRowMapper);
+    }
+
+    public List<OrderItem> getAllByOrderId(long orderId) {
         return jdbcTemplate.query("select * from public.orderitem o join public.product p on o.product_id = p.main_product_id", orderItemRowMapper);
     }
 }

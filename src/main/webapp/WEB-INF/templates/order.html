@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="_bootstrap::link">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Оформление заказа</title>
+</head>
+<body>
+<header th:insert="_header"></header>
+<h1>Оформление заказа</h1>
+<h3 th:text="${shop.title}">.text-warning</h3>
+<!--<p th:text="${shop.title}"></p>-->
+<p th:text="${shop.description}">.text-warning</p>
+
+<div class="container my-4">
+    <div class="row">
+
+        <div class="row mb-2" th:if="${!session.cart.getProducts().isEmpty()}"
+             th:each="cartItem:${cartItems}">
+            <div class="col-4" th:text="${cartItem.getSellerProduct().getProduct().getName() + cartItem.getSellerProduct().getProduct().getDescription()}"></div>
+            <div class="col-1" th:text="${cartItem.getQuantity()}"></div>
+            <div class="col-1" th:text="${cartItem.getSellerProduct().getPrice()*cartItem.getQuantity()}"></div>
+        </div>
+
+        <form action="/order" method="post"></form>
+        <!--            <input class="form-control w-50" type="text" th:name="delivery_address" min="50">-->
+        <span class="input-group-text">Адрес доставки</span>
+        <textarea class="form-control" aria-label="Адрес доставки"></textarea>
+
+        <div class="row my-2">
+            <div class="col-8 py-1">
+                <p class="text-start border-top" th:text="'Получатель: ' + ${accountName}"></p>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-8 py-1">
+                <p class="text-start border-top" th:text="'Стоимость всего ' + ${cartAmount} + ' р.'"></p>
+            </div>
+            <div class="col-4 py-1">
+                <button type="submit" class="btn btn-primary border-top">Подтвердить заказ</button>
+            </div>
+        </div>
+        </form>
+
+    </div>
+</div>
+
+
+</body>
+</html>
