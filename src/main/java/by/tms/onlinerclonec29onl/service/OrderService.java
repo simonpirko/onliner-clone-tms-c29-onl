@@ -5,6 +5,7 @@ import by.tms.onlinerclonec29onl.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +15,11 @@ public class OrderService {
     @Autowired
     private OrderDao orderDao;
 
-    public void createOrder(Order order) {
-        orderDao.save(order);
+//
+
+    public long createOrder(Order order) throws SQLException {
+        long orderId = orderDao.save(order);
+        return orderId;
     }
 
     public void updateOrder(Order order) {
