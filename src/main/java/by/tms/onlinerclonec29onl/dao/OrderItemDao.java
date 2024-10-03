@@ -23,7 +23,7 @@ public class OrderItemDao {
                 orderItem.getProduct().getId(),
                 orderItem.getQuantity(),
                 orderItem.getPrice(),
-                orderItem.getOrderId());
+                orderItem.getOrder().getId());
     }
 
     public int update(OrderItem orderItem) {
@@ -32,7 +32,7 @@ public class OrderItemDao {
                 orderItem.getQuantity(),
                 orderItem.getPrice(),
                 orderItem.getId(),
-                orderItem.getOrderId());
+                orderItem.getOrder().getId());
     }
 
     public Optional<OrderItem> getById(long id) {

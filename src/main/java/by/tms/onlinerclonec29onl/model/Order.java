@@ -18,8 +18,8 @@ public class Order {
     //private OrderItem orderItem;
     private BigDecimal totalPrice;
     private OrderStatus status;
-    private String delivery_address;
-    private Long accountId;
+    private String deliveryAddress;
+    private Account account;
 
     public enum OrderStatus {
         OPEN, CLOSED, ARCHIVED
